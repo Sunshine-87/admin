@@ -7,10 +7,19 @@
 		if (file_exists($destination)) {
 			require_once $destination;
 		} else {
-			throw new Exception("Error Processing Request");
+			throw new Exception("Wrong C");
 		}
 	}
+	$Auth = new Auth();
+	$Auth -> checkLogin();
 
-	$controller = $_GET['c'];
-	$method = $_GET['m'];
+	$c = $_GET['c'] ? $_GET['c'] : 'index';
+	$method = $_GET['m'] ? $_GET['m'] : 'index';
+	$controller = new $c();
+	try {
+		$controller -> $method();
+	} catch (Exception $e) {
+		throw new Exception("Wrong M");
+	}
+	
 ?>
