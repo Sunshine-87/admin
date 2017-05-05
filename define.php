@@ -1,0 +1,8 @@
+<?php
+	define('SURFIX', '.php');
+	define('ROOT', __DIR__);
+	define('CONTROLLER', ROOT.DIRECTORY_SEPARATOR.'controller'.DIRECTORY_SEPARATOR);
+	define('CORE', ROOT.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR);
+	define('TPL', ROOT.DIRECTORY_SEPARATOR.'tpl'.DIRECTORY_SEPARATOR);
+	
+?>
