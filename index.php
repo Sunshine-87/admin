@@ -1,25 +1,26 @@
 <?php
+	require_once 'comm.php';
 	$config = parse_ini_file('.env');
 	require_once 'define.php';
 
-	function __autoload($classname) {
-		$destination = CONTROLLER.$classname.SURFIX;
-		if (file_exists($destination)) {
-			require_once $destination;
-		} else {
-			throw new Exception("Wrong C");
-		}
-	}
 	$Auth = new Auth();
-	$Auth -> checkLogin();
+	$login = $Auth->checkLogin();
 
-	$c = $_GET['c'] ? $_GET['c'] : 'index';
-	$method = $_GET['m'] ? $_GET['m'] : 'index';
+	$c = isset($_GET['c']) ? $_GET['c'] : 'index';
+	$method = isset($_GET['m']) ? $_GET['m'] : 'index';
+	
+	// if ($c!='login' || $method!='index') {
+	// 	if (!$login) {
+	// 		skip('index.php?c=login&m=index');
+	// 		exit;
+	// 	}
+	// }
+	
 	$controller = new $c();
 	try {
 		$controller -> $method();
 	} catch (Exception $e) {
-		throw new Exception("Wrong M");
+		throw $e;
 	}
 	
 ?>
