@@ -17,7 +17,6 @@
 					</thead>
 					<tbody>
 						<?php
-							$course;
 							var_dump($course);
 						?>
 							

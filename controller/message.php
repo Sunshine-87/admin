@@ -11,7 +11,9 @@ class message extends Controller
 		foreach ($course as $key => $value) {
 			$course[$key]['publish_time'] = date('Y-m-d H:i:s',$value['publish_time']);
 		}
-		$this->display('messageList.php');
+		$data['course'] = $course;
+		// $GLOBALS['course'] = $course;
+		$this->display('messageList.php',$data);
 	}
 }
 ?>

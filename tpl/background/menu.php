@@ -12,7 +12,7 @@
 			<dt><i class="Hui-iconfont">&#xe622;</i> 消息管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a href="index.php?c=message&m=index" title="评论列表">评论列表</a></li>
+					<li><a href="index.php?c=message&m=qiubangzhu" title="求帮助">求帮助</a></li>
 				</ul>
 			</dd>
 		</dl>
