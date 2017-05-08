@@ -41,21 +41,47 @@ class TBLink {
 	}
 
 	function get() {
+		$this->sqlPreprocessing();
+		$rs = mysqli_query($this->connect, $this->sql);
+		$result = array();
+		while ($row = mysqli_fetch_array($rs)) {
+			array_push($result, $row);
+		}
+		return $result;
+	}
+
+	function first() {
+		$this->sqlPreprocessing();
+		$rs = mysqli_query($this->connect, $this->sql);
+		$result = mysqli_fetch_array($rs);
+		return $result;
+	}
+
+	function query($sql) {
+		$rs = mysqli_query($this->connect, $sql);
+		$result = array();
+		while ($row = mysqli_fetch_array($rs)) {
+			array_push($result, $row);
+		}
+		return $result;
+	}
+
+	function sqlPreprocessing() {
 		$where = '';
 		$thisW = $this->where;
 		for ($i=0; $i < count($thisW); $i++) { 
 			if ($i == 0) {
 				$where .= ' WHERE '.$thisW[$i][0];
 			} else {
-				$where .= $thisW[$i][1].' '.$thisW[$i][0];
+				$where .= ' '.$thisW[$i][1].' '.$thisW[$i][0];
 			}
 		}
-		$sql = $this->sql.$where;
-		return mysqli_query($this->connect, $sql);
+		$this->sql = $this->sql.$where;
 	}
 
 	function update() {
-		
+		$this->sql = 'UPDATE '.$this->table_name.' SET ';
+		return $this;
 	}
 
 	function insert() {

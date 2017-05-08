@@ -1,11 +1,18 @@
 <?php
 class Controller
 {
-	function display() {
-		require TPL.'meta.html';
-		require TPL.'header.html';
-		require TPL.'menu.html';
-		require TPL.'footer.html';
+	function display($tpl = '') {
+		if ($tpl != 'login.php') {
+			require_once TPL.'background/meta.html';
+			require_once TPL.'background/header.php';
+			require_once TPL.'background/menu.php';
+		}
+		if (!empty($tpl)) {
+			require_once TPL.$tpl;
+		}
+		if ($tpl != 'login.php') {
+			require_once TPL.'background/footer.html';
+		}
 	}
 }
 ?>
