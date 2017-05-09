@@ -43,18 +43,27 @@ class TBLink {
 	function get() {
 		$this->sqlPreprocessing();
 		$rs = mysqli_query($this->connect, $this->sql);
-		$result = array();
-		while ($row = mysqli_fetch_array($rs)) {
-			array_push($result, $row);
+		if (!is_bool($rs)) {
+			$result = array();
+			while ($row = mysqli_fetch_array($rs)) {
+				array_push($result, $row);
+			}
+			return $result;
+		} else {
+			return $rs;
 		}
-		return $result;
+		
 	}
 
 	function first() {
 		$this->sqlPreprocessing();
 		$rs = mysqli_query($this->connect, $this->sql);
-		$result = mysqli_fetch_array($rs);
-		return $result;
+		if (!is_bool($rs)) {
+			$result = mysqli_fetch_array($rs);
+			return $result;
+		} else {
+			return $rs;
+		}
 	}
 
 	function query($sql) {
@@ -79,13 +88,28 @@ class TBLink {
 		$this->sql = $this->sql.$where;
 	}
 
-	function update() {
+	function update($update) {
 		$this->sql = 'UPDATE '.$this->table_name.' SET ';
+		$set = $this->setStr($update);
+		$this->sql .= $set;
 		return $this;
 	}
 
 	function insert() {
 
+	}
+
+	function setStr($set) {
+		$setArr = array();
+		foreach ($set as $set) {
+			if (count($set) == 2) {
+				array_push($setArr, ' '.$set[0].'=\''.$set[1].'\' ');
+			} else {
+				throw new Exception("Wrong arguments for the set string");
+			}
+		}
+		$setStr = implode(',', $setArr);
+		return $setStr;
 	}
 
 	function whereStr($where) {

@@ -1,5 +1,5 @@
 <section class="Hui-article-box">
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户中心 <span class="c-gray en">&gt;</span> 会员列表<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 消息管理 <span class="c-gray en">&gt;</span> 求帮助<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
 			<div class="mt-20">
@@ -17,12 +17,23 @@
 					</thead>
 					<tbody>
 						<?php
-							var_dump($course);
+						if (!empty($course)) {
+							foreach ($course as $course) {
+							
 						?>
-							
-
+							<tr class="text-c">
+								<td><input type="checkbox" value="1" name=""></td>
+								<td><?php echo $course['id']; ?></td>
+								<td><u style="cursor:pointer" class="text-primary" onclick="member_show('<?php echo $course['nickname']; ?>','index.php?c=member&m=membershow&id=<?php echo $course['userid']; ?>','10001','360','400')"><?php echo $course['nickname']; ?></u></td>
+								<td><?php echo $course['title']; ?></td>
+								<td><?php echo $course['price']; ?></td>
+								<!-- <td class="text-l">北京市 海淀区</td> -->
+								<td><?php echo $course['publish_time']; ?></td>
+								<td class="td-manage"><a title="详情" href="javascript:;" onclick="member_edit('详情','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="member_del('<?php echo $course['id'] ?>')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+							</tr>
 						<?php
-							
+							}
+						}
 						?>
 					</tbody>
 				</table>
@@ -38,11 +49,7 @@
 $(function(){
 	$('.table-sort').dataTable({
 		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
-		"bStateSave": true,//状态保存
-		"aoColumnDefs": [
-		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-		  {"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
-		]
+		"bStateSave": true
 	});
 	$('.table-sort tbody').on( 'click', 'tr', function () {
 		if ( $(this).hasClass('selected') ) {
@@ -90,10 +97,23 @@ function change_password(title,url,id,w,h){
 	layer_show(title,url,w,h);	
 }
 /*用户-删除*/
-function member_del(obj,id){
+function member_del(id){
 	layer.confirm('确认要删除吗？',function(index){
-		$(obj).parents("tr").remove();
-		layer.msg('已删除!',{icon:1,time:1000});
+		$.ajax({
+			async: true,
+			url: 'index.php?c=message&m=messagedel',
+			dataType: 'json',
+			type: 'post',
+			data: {id: id, type: 'qiubangzhu'},
+			success: function(data) {
+				if (data.status == 1) {
+					layer.msg('已删除！',{icon:1,time:1000});
+					location.reload();
+				} else {
+					layer.msg('出错！请联系管理员',{icon:2,time:1000});
+				}
+			}
+		});
 	});
 }
 </script>

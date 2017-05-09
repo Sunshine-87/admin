@@ -13,6 +13,8 @@
 			<dd>
 				<ul>
 					<li><a href="index.php?c=message&m=qiubangzhu" title="求帮助">求帮助</a></li>
+					<li><a href="index.php?c=message&m=lingkuaidi" title="领快递">领快递</a></li>
+					<li><a href="index.php?c=message&m=xiaojishi" title="小集市">小集市</a></li>
 				</ul>
 			</dd>
 		</dl>

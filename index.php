@@ -27,7 +27,7 @@
 	try {
 		$controller -> $method();
 	} catch (Exception $e) {
-		throw new Exception("Wrong M");
+		throw $e;
 	}
 	
 ?>
