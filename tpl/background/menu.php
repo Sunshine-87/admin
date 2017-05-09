@@ -4,7 +4,7 @@
 			<dt><i class="Hui-iconfont">&#xe616;</i> 平台营业情况<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a href="index.php?c=index&m=denglurenci" title="登录人次">登录人次</a></li>
+					<li><a href="index.php?c=index&m=denglurenci" title="日活动人数">日活动人数</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -22,8 +22,9 @@
 			<dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a href="member-list.html" title="待封会员">待封会员</a></li>
-					<li><a href="member-del.html" title="已封会员">已封会员</a></li>
+					<li><a href="index.php?c=member&m=memberlist" title="会员列表">会员列表</a></li>
+					<li><a href="index.php?c=member&m=membertobebanned" title="待封会员">待封会员</a></li>
+					<li><a href="index.php?c=member&m=memberhasbeenbanned" title="已封会员">已封会员</a></li>
 				</ul>
 			</dd>
 		</dl>

@@ -1,5 +1,5 @@
 <section class="Hui-article-box">
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 平台营业情况 <span class="c-gray en">&gt;</span> 登录人次 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 平台营业情况 <span class="c-gray en">&gt;</span> 日活动人数 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
 			<div id="container" style="min-width:700px;height:400px"></div>
@@ -36,7 +36,7 @@ $(function () {
 	// categories.push('2017-05-04');
     $('#container').highcharts({
         title: {
-            text: '登录人次',
+            text: '日活',
             x: -20 //center
         },
         xAxis: {
@@ -44,7 +44,7 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: '人次'
+                text: '人'
             },
             plotLines: [{
                 value: 0,
@@ -54,7 +54,7 @@ $(function () {
             min: 0
         },
         tooltip: {
-            valueSuffix: '人次'
+            valueSuffix: '人'
         },
         legend: {
             layout: 'vertical',
@@ -64,8 +64,13 @@ $(function () {
             enabled: false
         },
         series: [{
-            name: '登录人次',
-            data: <?php echo '[7, 6, 9, 14, 18, 21, 25]'; ?>
+            name: '日活',
+            data: <?php $rh = array();
+            foreach ($rihuo as $rihuo) {
+                array_push($rh, $rihuo['login_num']);
+            }
+            $rh = implode(',', $rh);
+            echo '['.$rh.']'; ?>
         }],
         credits: {
         	enabled: false
