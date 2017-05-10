@@ -16,7 +16,9 @@ class login extends Controller
 			$password = $_POST['ps'];
 			$user = $this->admin->where(array(['usnm',$username]))->first();
 			if ($user['pass'] == $password) {
-				session_start();
+				if(!isset($_SESSION)) {
+					session_start();
+				}
 				$_SESSION['userID'] = $user['id'];
 				$_SESSION['userName'] = $user['usnm'];
 				skip('?c=index&m=denglurenci');
