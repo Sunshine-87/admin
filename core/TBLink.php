@@ -10,7 +10,6 @@ class TBLink {
 	function __construct($table_name) {
 		if (empty(DBLink::$connect)) {
 			new DBLink(DBNAME,DBHOST,DBUSERNAME,DBPASSWORD);
-			$this->connect = &DBLink::$connect;
 		}
 		$this->table_name = $table_name;
 		$this->sql = 'SELECT * FROM '.$this->table_name;
@@ -34,7 +33,7 @@ class TBLink {
 
 	function orWhere($where = array()) {
 		if (!empty($where)) {
-			$whereStr = whereStr($where);
+			$whereStr = $this->whereStr($where);
 		}
 		array_push($this->where, array($whereStr , 'or'));
 		return $this;
@@ -42,7 +41,7 @@ class TBLink {
 
 	function get() {
 		$this->sqlPreprocessing();
-		$rs = mysqli_query($this->connect, $this->sql);
+		$rs = mysqli_query(DBLink::$connect, $this->sql);
 		if (!is_bool($rs)) {
 			$result = array();
 			while ($row = mysqli_fetch_array($rs)) {
@@ -57,7 +56,7 @@ class TBLink {
 
 	function first() {
 		$this->sqlPreprocessing();
-		$rs = mysqli_query($this->connect, $this->sql);
+		$rs = mysqli_query(DBLink::$connect, $this->sql);
 		if (!is_bool($rs)) {
 			$result = mysqli_fetch_array($rs);
 			return $result;
@@ -67,7 +66,7 @@ class TBLink {
 	}
 
 	function query($sql) {
-		$rs = mysqli_query($this->connect, $sql);
+		$rs = mysqli_query(DBLink::$connect, $sql);
 		$result = array();
 		while ($row = mysqli_fetch_array($rs)) {
 			array_push($result, $row);
@@ -95,8 +94,12 @@ class TBLink {
 		return $this;
 	}
 
-	function insert() {
-
+	function insert($insert) {
+		$this->sql = 'INSERT INTO '.$this->table_name.' SET ';
+		$set = $this->setStr($insert);
+		$this->sql .= $set;
+		$rs = mysqli_query(DBLink::$connect, $this->sql);
+		return $rs;
 	}
 
 	function setStr($set) {

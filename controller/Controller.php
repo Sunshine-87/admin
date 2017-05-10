@@ -5,7 +5,8 @@ class Controller
 
 	private $deny = [
 	'login.php' => ['background/meta.html','background/header.php','background/menu.php','background/footer.html'],
-	'member/membershow.php'=>['background/header.php','background/menu.php']
+	'member/membershow.php'=>['background/header.php','background/menu.php'],
+	'message/detail.php'=>['background/header.php','background/menu.php']
 	];
 
 	function display($tpl = '', $data=array()) {

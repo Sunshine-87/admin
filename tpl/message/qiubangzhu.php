@@ -29,7 +29,7 @@
 								<td><?php echo $course['price']; ?></td>
 								<!-- <td class="text-l">北京市 海淀区</td> -->
 								<td><?php echo $course['publish_time']; ?></td>
-								<td class="td-manage"><a title="详情" href="javascript:;" onclick="member_edit('详情','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="member_del('<?php echo $course['id'] ?>')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+								<td class="td-manage"><a title="详情" href="javascript:;" onclick="member_edit('详情','index.php?c=message&m=bangzhudetail&id=<?php echo $course['id'] ?>','4','350','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="member_del('<?php echo $course['id'] ?>')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 							</tr>
 						<?php
 							}

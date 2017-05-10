@@ -15,6 +15,33 @@ class message extends Controller
 		$this->display('message/qiubangzhu.php',$data);
 	}
 
+	function bangzhudetail() {
+		$id = $_GET['id'];
+		$qiubangzhu = new TBLink('course');
+		$detail = $qiubangzhu->where([['id',$id]])->first();
+		$data['detail'] = $detail;
+		$this->display('message/detail.php',$data);
+	}
+
+	function jishidetail() {
+		$id = $_GET['id'];
+		$xiaojishi = new TBLink('jishi');
+		$detail = $xiaojishi->where([['id',$id]])->first();
+		$imageid = $detail['image'];
+		$imageid = explode(',', $imageid);
+		if (count($imageid)!=0) {
+			$trueImage = array();
+			$imageTable = new TBLink('image');
+			foreach ($imageid as $imageid) {
+				$imageurl = $imageTable->where([['id',$imageid]])->first();
+				array_push($trueImage, $imageurl);
+			}
+		}
+		$detail['imageArr'] = $trueImage;
+		$data['detail'] = $detail;
+		$this->display('message/detail.php',$data);
+	}
+
 	function lingkuaidi() {
 		$kuaidi = new TBLink('kuaidi');
 		$kuaidi = $kuaidi->query('select a.userid,a.kuaidiTime,a.id,a.place,b.nickname,a.destination,a.publish_time from kuaidi as a, userinfo as b where b.id = a.userid and a.status = 0 order by publish_time desc');

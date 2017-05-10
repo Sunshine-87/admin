@@ -1,5 +1,5 @@
 <section class="Hui-article-box">
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 消息管理 <span class="c-gray en">&gt;</span> 领快递<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 会员管理 <span class="c-gray en">&gt;</span> 会员列表<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
 			<div class="mt-20">
@@ -13,7 +13,6 @@
 							<th width="150">性别</th>
 							<th width="150">上次登录时间</th>
 							<th width="70">状态</th>
-							<th width="100">操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -30,8 +29,7 @@
 								<td><?php echo $member['sex']; ?></td>
 								<!-- <td class="text-l">北京市 海淀区</td> -->
 								<td><?php echo $member['last_login']; ?></td>
-								<td class="td-status"><span class="label label-<?php echo ($member['passed'] == false)? 'success':'failed' ?> radius"><?php echo ($member['status'] == 0)? '正常':'封停' ?></span></td>
-								<td class="td-manage"><a title="详情" href="javascript:;" onclick="member_edit('详情','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="member_del('<?php echo $member['id']; ?>')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+								<td class="td-status"><span class="label label-<?php echo ($member['status'] == false)? 'success':'failed' ?> radius"><?php echo ($member['status'] == 0)? '正常':'封停' ?></span></td>
 							</tr>
 						<?php
 							}
